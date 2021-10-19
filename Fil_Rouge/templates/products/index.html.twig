@@ -1,0 +1,56 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des jeux{% endblock %}
+
+{% block body %}
+    <h1 class="text-center">Liste des jeux</h1>
+
+    <div class="container">
+
+        <div class="row row-cols-1 row-cols-md-2 g-4">
+
+        {% for product in products %}
+
+        <div class="col">
+            <div class="card h-100">
+                <div class="row g-0">
+                    <div class="col-md-4">
+                    <img src="/images/v3.png" class="img-fluid rounded-start" alt="...">
+                    </div>
+                    <div class="col-md-8">
+                        <div class="card-body">
+                            {{ product.id }}
+                            <br>
+                            {{ product.ProductName }}
+                            <br>
+                            {{ product.CategoryID }}
+                            <br>
+                            {{ product.QuantityPerUnit }}
+                            <br>
+                            {{ product.UnitPrice }}
+                            <br>
+                            {{ product.UnitsInStock }}
+                            <br>
+                            {{ product.UnitsOnOrder }}
+                            <br>
+                            {{ product.ReorderLevel }}
+                            <br>
+                            {{ product.Discontinued ? 'Yes' : 'No' }}
+                        </div>
+                        </div>
+                        <div class="card-footer">
+                            <a class="btn btn-light" href="{{ path('products_show', {'id': product.id}) }}">Voir Détails</a>
+                            <a class="btn btn-light" href="{{ path('products_edit', {'id': product.id}) }}">Modifier le produit</a>
+                        </div>
+                    
+                </div>
+            </div>
+        </div>
+
+        {% else %}
+            Pas de produit trouvé
+        {% endfor %}
+
+    </div>
+ <a class="btn btn-success" href="{{ path('products_new') }}"><i class="bi bi-plus-square"></i> Ajouter un produit</a>
+{% endblock %}
