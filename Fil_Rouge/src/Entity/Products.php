@@ -20,58 +20,75 @@ class Products
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=100)
+     * @ORM\Column(type="string", length=150)
      */
-    private $ProductName;
-
-    /**
-     * @ORM\Column(type="integer", nullable=true)
-     */
-    private $CategoryID;
-
-    /**
-     * @ORM\Column(type="string", length=20, nullable=true)
-     */
-    private $QuantityPerUnit;
+    private $pro_name;
 
     /**
      * @ORM\Column(type="decimal", precision=10, scale=4)
      */
-    private $UnitPrice;
+    private $pro_price;
 
     /**
-     * @ORM\Column(type="smallint", nullable=true)
+     * @ORM\Column(type="decimal", precision=2, scale=2, nullable=true)
      */
-    private $UnitsInStock;
+    private $pro_vat;
 
     /**
-     * @ORM\Column(type="smallint", nullable=true)
+     * @ORM\Column(type="string", length=100)
      */
-    private $UnitsOnOrder;
+    private $pro_ref;
 
     /**
-     * @ORM\Column(type="smallint")
+     * @ORM\Column(type="integer")
      */
-    private $ReorderLevel;
+    private $pro_stock;
 
     /**
-     * @ORM\Column(type="boolean")
+     * @ORM\Column(type="string", length=25)
      */
-    private $Discontinued;
+    private $pro_wording;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Suppliers::class, inversedBy="ProSupID")
+     * @ORM\Column(type="text", nullable=true)
      */
-    private $ProSupID;
+    private $pro_description;
 
     /**
-     * @ORM\OneToMany(targetEntity=OrderDetails::class, mappedBy="OdeProdID")
+     * @ORM\Column(type="string", length=10)
      */
-    private $OdeProdID;
+    private $pro_picture;
+
+    /**
+     * @ORM\Column(type="datetime")
+     */
+    private $pro_date_add;
+
+    /**
+     * @ORM\Column(type="datetime")
+     */
+    private $pro_date_modif;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Categories::class, inversedBy="pro_cat_id")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $cat_id;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Suppliers::class, inversedBy="pro_sup_id")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $sup_id;
+
+    /**
+     * @ORM\OneToMany(targetEntity=OrdersDetails::class, mappedBy="pro_id", orphanRemoval=true)
+     */
+    private $ode_pro_id;
 
     public function __construct()
     {
-        $this->OdeProdID = new ArrayCollection();
+        $this->ode_pro_id = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -79,138 +96,174 @@ class Products
         return $this->id;
     }
 
-    public function getProductName(): ?string
+    public function getProName(): ?string
     {
-        return $this->ProductName;
+        return $this->pro_name;
     }
 
-    public function setProductName(string $ProductName): self
+    public function setProName(string $pro_name): self
     {
-        $this->ProductName = $ProductName;
+        $this->pro_name = $pro_name;
 
         return $this;
     }
 
-    public function getCategoryID(): ?int
+    public function getProPrice(): ?string
     {
-        return $this->CategoryID;
+        return $this->pro_price;
     }
 
-    public function setCategoryID(?int $CategoryID): self
+    public function setProPrice(string $pro_price): self
     {
-        $this->CategoryID = $CategoryID;
+        $this->pro_price = $pro_price;
 
         return $this;
     }
 
-    public function getQuantityPerUnit(): ?string
+    public function getProVat(): ?string
     {
-        return $this->QuantityPerUnit;
+        return $this->pro_vat;
     }
 
-    public function setQuantityPerUnit(?string $QuantityPerUnit): self
+    public function setProVat(?string $pro_vat): self
     {
-        $this->QuantityPerUnit = $QuantityPerUnit;
+        $this->pro_vat = $pro_vat;
 
         return $this;
     }
 
-    public function getUnitPrice(): ?string
+    public function getProRef(): ?string
     {
-        return $this->UnitPrice;
+        return $this->pro_ref;
     }
 
-    public function setUnitPrice(string $UnitPrice): self
+    public function setProRef(string $pro_ref): self
     {
-        $this->UnitPrice = $UnitPrice;
+        $this->pro_ref = $pro_ref;
 
         return $this;
     }
 
-    public function getUnitsInStock(): ?int
+    public function getProStock(): ?int
     {
-        return $this->UnitsInStock;
+        return $this->pro_stock;
     }
 
-    public function setUnitsInStock(?int $UnitsInStock): self
+    public function setProStock(int $pro_stock): self
     {
-        $this->UnitsInStock = $UnitsInStock;
+        $this->pro_stock = $pro_stock;
 
         return $this;
     }
 
-    public function getUnitsOnOrder(): ?int
+    public function getProWording(): ?string
     {
-        return $this->UnitsOnOrder;
+        return $this->pro_wording;
     }
 
-    public function setUnitsOnOrder(?int $UnitsOnOrder): self
+    public function setProWording(string $pro_wording): self
     {
-        $this->UnitsOnOrder = $UnitsOnOrder;
+        $this->pro_wording = $pro_wording;
 
         return $this;
     }
 
-    public function getReorderLevel(): ?int
+    public function getProDescription(): ?string
     {
-        return $this->ReorderLevel;
+        return $this->pro_description;
     }
 
-    public function setReorderLevel(int $ReorderLevel): self
+    public function setProDescription(?string $pro_description): self
     {
-        $this->ReorderLevel = $ReorderLevel;
+        $this->pro_description = $pro_description;
 
         return $this;
     }
 
-    public function getDiscontinued(): ?bool
+    public function getProPicture(): ?string
     {
-        return $this->Discontinued;
+        return $this->pro_picture;
     }
 
-    public function setDiscontinued(bool $Discontinued): self
+    public function setProPicture(string $pro_picture): self
     {
-        $this->Discontinued = $Discontinued;
+        $this->pro_picture = $pro_picture;
 
         return $this;
     }
 
-    public function getProSupID(): ?Suppliers
+    public function getProDateAdd(): ?\DateTimeInterface
     {
-        return $this->ProSupID;
+        return $this->pro_date_add;
     }
 
-    public function setProSupID(?Suppliers $ProSupID): self
+    public function setProDateAdd(\DateTimeInterface $pro_date_add): self
     {
-        $this->ProSupID = $ProSupID;
+        $this->pro_date_add = $pro_date_add;
+
+        return $this;
+    }
+
+    public function getProDateModif(): ?\DateTimeInterface
+    {
+        return $this->pro_date_modif;
+    }
+
+    public function setProDateModif(\DateTimeInterface $pro_date_modif): self
+    {
+        $this->pro_date_modif = $pro_date_modif;
+
+        return $this;
+    }
+
+    public function getCatId(): ?Categories
+    {
+        return $this->cat_id;
+    }
+
+    public function setCatId(?Categories $cat_id): self
+    {
+        $this->cat_id = $cat_id;
+
+        return $this;
+    }
+
+    public function getSupId(): ?Suppliers
+    {
+        return $this->sup_id;
+    }
+
+    public function setSupId(?Suppliers $sup_id): self
+    {
+        $this->sup_id = $sup_id;
 
         return $this;
     }
 
     /**
-     * @return Collection|OrderDetails[]
+     * @return Collection|OrdersDetails[]
      */
-    public function getOdeProdID(): Collection
+    public function getOdeProId(): Collection
     {
-        return $this->OdeProdID;
+        return $this->ode_pro_id;
     }
 
-    public function addOdeProdID(OrderDetails $odeProdID): self
+    public function addOdeProId(OrdersDetails $odeProId): self
     {
-        if (!$this->OdeProdID->contains($odeProdID)) {
-            $this->OdeProdID[] = $odeProdID;
-            $odeProdID->setOdeProdID($this);
+        if (!$this->ode_pro_id->contains($odeProId)) {
+            $this->ode_pro_id[] = $odeProId;
+            $odeProId->setProId($this);
         }
 
         return $this;
     }
 
-    public function removeOdeProdID(OrderDetails $odeProdID): self
+    public function removeOdeProId(OrdersDetails $odeProId): self
     {
-        if ($this->OdeProdID->removeElement($odeProdID)) {
+        if ($this->ode_pro_id->removeElement($odeProId)) {
             // set the owning side to null (unless already changed)
-            if ($odeProdID->getOdeProdID() === $this) {
-                $odeProdID->setOdeProdID(null);
+            if ($odeProId->getProId() === $this) {
+                $odeProId->setProId(null);
             }
         }
 

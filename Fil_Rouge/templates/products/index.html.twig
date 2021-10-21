@@ -3,54 +3,84 @@
 {% block title %}Liste des jeux{% endblock %}
 
 {% block body %}
-    <h1 class="text-center">Liste des jeux</h1>
+    
+    <h1 class="text-center m-5 gabriola">LISTE DES JEUX</h1>
 
-    <div class="container">
-
-        <div class="row row-cols-1 row-cols-md-2 g-4">
+    <div class="row row-cols-1 row-cols-md-2 g-4">
 
         {% for product in products %}
 
-        <div class="col">
-            <div class="card h-100">
-                <div class="row g-0">
-                    <div class="col-md-4">
-                    <img src="/images/v3.png" class="img-fluid rounded-start" alt="...">
+            <div class="col">
+                <div class="card h-100 border-0 ">
+                    <div class="row g-0 border border-3 border-warning rounded-3">
+                        <div class="col-md-5 bg-dark">
+                        <img src="/images/AC.jpg" class="img-fluid rounded-start" alt="imgJeu">
+                        </div>
+                        <div class="col-md-7 ">
+                            <div class="p-0 ps-3 card-body">
+                                <table class="table table-borderless">
+                                    <tbody>
+                                        <tr>
+                                            <th>Id</th>
+                                            <td>{{ product.id }}</td>
+                                        </tr>
+                                        <tr>                                        
+                                            <th>Nom</th>
+                                            <td>{{ product.ProductName }}</td>
+                                        </tr>
+                                        <tr>    
+                                            <th>CategoryID</th>
+                                            <td>{{ product.CategoryID }}</td>
+                                        </tr>
+                                        <tr>
+                                            <th>QuantityPerUnit</th>
+                                            <td>{{ product.QuantityPerUnit }}</td>
+                                        </tr>
+                                        <tr>
+                                            <th>UnitPrice</th>
+                                            <td>{{ product.UnitPrice }}</td>
+                                        </tr>
+                                        <tr>
+                                            <th>UnitsInStock</th>
+                                            <td>{{ product.UnitsInStock }}</td>
+                                        </tr>
+                                        <tr>
+                                            <th>UnitsOnOrder</th>
+                                            <td>{{ product.UnitsOnOrder }}</td>
+                                        </tr>
+                                        <tr>
+                                            <th>ReorderLevel</th>
+                                            <td>{{ product.ReorderLevel }}</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Discontinued</th>
+                                            <td>{{ product.Discontinued ? 'Yes' : 'No' }}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="row row-cols-3 m-0 card-footer text-center bg-dark">
+                            <div class="col-md-4">
+                                <a class="text-info" href="{{ path('products_show', {'id': product.id}) }}"><i class="bi bi-eye fs-2"></i></a>
+                            </div>
+                            <div class="col-md-4">
+                                <a class="text-warning" href="{{ path('products_edit', {'id': product.id}) }}"><i class="bi bi-pen fs-2"></i></a>
+                            </div>
+                            <div class="col-md-4">
+                                <a class="text-success" href="#"><i class="bi bi-bag-plus fs-2"></i></a>
+                            </div>
+                        </div>
                     </div>
-                    <div class="col-md-8">
-                        <div class="card-body">
-                            {{ product.id }}
-                            <br>
-                            {{ product.ProductName }}
-                            <br>
-                            {{ product.CategoryID }}
-                            <br>
-                            {{ product.QuantityPerUnit }}
-                            <br>
-                            {{ product.UnitPrice }}
-                            <br>
-                            {{ product.UnitsInStock }}
-                            <br>
-                            {{ product.UnitsOnOrder }}
-                            <br>
-                            {{ product.ReorderLevel }}
-                            <br>
-                            {{ product.Discontinued ? 'Yes' : 'No' }}
-                        </div>
-                        </div>
-                        <div class="card-footer">
-                            <a class="btn btn-light" href="{{ path('products_show', {'id': product.id}) }}">Voir Détails</a>
-                            <a class="btn btn-light" href="{{ path('products_edit', {'id': product.id}) }}">Modifier le produit</a>
-                        </div>
-                    
                 </div>
             </div>
-        </div>
-
         {% else %}
             Pas de produit trouvé
         {% endfor %}
-
+        
     </div>
- <a class="btn btn-success" href="{{ path('products_new') }}"><i class="bi bi-plus-square"></i> Ajouter un produit</a>
+
+    <a class="btn btn-success m-3" href="{{ path('products_new') }}"><i class="bi bi-plus-square"></i> Ajouter un produit</a>
+
+
 {% endblock %}

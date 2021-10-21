@@ -1,4 +1,66 @@
 {{ form_start(form) }}
-    {{ form_widget(form) }}
-    <button class="btn">{{ button_label|default('Save') }}</button>
+
+    {# Reprend l'éléments ProductName #}
+    <div class="row">
+        <div class="form-group col-6">
+            {{ form_row(form.ProductName) }}
+        </div>
+
+    {# Reprend l'éléments SupplierID #}
+        <div class="form-group col-md-6">
+            {{ form_row(form.ProSupID) }}
+        </div>
+
+        <br>
+
+    </div>
+
+    <div class="row">
+    {# Reprend l'éléments CategoryID #}
+        <div class="form-group col-md-4">
+            {{ form_row(form.CategoryID) }}
+        </div>
+
+    {# Reprend l'éléments Quantité Par Unité #}
+        <div class="form-group col-md-4">
+            {{ form_row(form.QuantityPerUnit) }}
+        </div>
+
+    {# Reprend l'éléments  Prix Unitaire#}
+        <div class="form-group col-md-4">
+            {{ form_row(form.UnitPrice) }}
+        </div>
+    </div>
+
+        <br>
+        
+    <div class="row">
+    {# Reprend l'éléments Quantité En Stock #}
+        <div class="form-group col-md-4">
+            {{ form_row(form.UnitsInStock) }}
+        </div>
+
+    {# Reprend l'éléments Quantité En Commande #}
+        <div class="form-group col-md-4">
+            {{ form_row(form.UnitsOnOrder) }}
+        </div>
+
+    {# Reprend l'éléments Niveau D'alerte#}   
+        <div class="form-group col-md-4">
+            {{ form_row(form.ReorderLevel) }}
+        </div>
+
+        <div class="form-group col-md-4">
+            {{ form_row(form.Discontinued) }}
+        </div>
+    </div>
+
+        <br>
+        
+
+    <div class="row">
+        <div class="col-md-4 text-center">
+    <button class="btn btn-success">{{ button_label|default('Save') }}</button>
+        </div>
+
 {{ form_end(form) }}

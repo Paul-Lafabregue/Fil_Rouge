@@ -20,68 +20,59 @@ class Suppliers
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=100)
+     * @ORM\Column(type="string", length=150)
      */
-    private $CompanyName;
+    private $sup_company_name;
 
     /**
-     * @ORM\Column(type="string", length=100)
+     * @ORM\Column(type="boolean")
      */
-    private $ContactName;
+    private $sup_type;
 
     /**
-     * @ORM\Column(type="string", length=100)
+     * @ORM\Column(type="string", length=150)
      */
-    private $ContactTitle;
-
-    /**
-     * @ORM\Column(type="string", length=100, nullable=true)
-     */
-    private $Address;
-
-    /**
-     * @ORM\Column(type="string", length=30, nullable=true)
-     */
-    private $City;
-
-    /**
-     * @ORM\Column(type="string", length=25)
-     */
-    private $Region;
-
-    /**
-     * @ORM\Column(type="string", length=10, nullable=true)
-     */
-    private $PostalCode;
-
-    /**
-     * @ORM\Column(type="string", length=30, nullable=true)
-     */
-    private $Country;
+    private $sup_address;
 
     /**
      * @ORM\Column(type="string", length=24)
      */
-    private $Phone;
+    private $sup_zipcode;
 
     /**
-     * @ORM\Column(type="string", length=24, nullable=true)
+     * @ORM\Column(type="string", length=50)
      */
-    private $Fax;
+    private $sup_city;
 
     /**
-     * @ORM\Column(type="text", nullable=true)
+     * @ORM\Column(type="string", length=150)
      */
-    private $HomePage;
+    private $sup_contact_name;
 
     /**
-     * @ORM\OneToMany(targetEntity=Products::class, mappedBy="ProSupID")
+     * @ORM\Column(type="string", length=24)
      */
-    private $ProSupID;
+    private $sup_phone;
+
+    /**
+     * @ORM\Column(type="string", length=150)
+     */
+    private $sup_mail;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Countries::class, inversedBy="sup_cou_id")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $cou_id;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Products::class, mappedBy="sup_id")
+     */
+    private $pro_sup_id;
 
     public function __construct()
     {
-        $this->ProSupID = new ArrayCollection();
+        $this->pro_sup_id = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -89,134 +80,110 @@ class Suppliers
         return $this->id;
     }
 
-    public function getCompanyName(): ?string
+    public function getSupCompanyName(): ?string
     {
-        return $this->CompanyName;
+        return $this->sup_company_name;
     }
 
-    public function setCompanyName(string $CompanyName): self
+    public function setSupCompanyName(string $sup_company_name): self
     {
-        $this->CompanyName = $CompanyName;
+        $this->sup_company_name = $sup_company_name;
 
         return $this;
     }
 
-    public function getContactName(): ?string
+    public function getSupType(): ?bool
     {
-        return $this->ContactName;
+        return $this->sup_type;
     }
 
-    public function setContactName(string $ContactName): self
+    public function setSupType(bool $sup_type): self
     {
-        $this->ContactName = $ContactName;
+        $this->sup_type = $sup_type;
 
         return $this;
     }
 
-    public function getContactTitle(): ?string
+    public function getSupAddress(): ?string
     {
-        return $this->ContactTitle;
+        return $this->sup_address;
     }
 
-    public function setContactTitle(string $ContactTitle): self
+    public function setSupAddress(string $sup_address): self
     {
-        $this->ContactTitle = $ContactTitle;
+        $this->sup_address = $sup_address;
 
         return $this;
     }
 
-    public function getAddress(): ?string
+    public function getSupZipcode(): ?string
     {
-        return $this->Address;
+        return $this->sup_zipcode;
     }
 
-    public function setAddress(?string $Address): self
+    public function setSupZipcode(string $sup_zipcode): self
     {
-        $this->Address = $Address;
+        $this->sup_zipcode = $sup_zipcode;
 
         return $this;
     }
 
-    public function getCity(): ?string
+    public function getSupCity(): ?string
     {
-        return $this->City;
+        return $this->sup_city;
     }
 
-    public function setCity(?string $City): self
+    public function setSupCity(string $sup_city): self
     {
-        $this->City = $City;
+        $this->sup_city = $sup_city;
 
         return $this;
     }
 
-    public function getRegion(): ?string
+    public function getSupContactName(): ?string
     {
-        return $this->Region;
+        return $this->sup_contact_name;
     }
 
-    public function setRegion(string $Region): self
+    public function setSupContactName(string $sup_contact_name): self
     {
-        $this->Region = $Region;
+        $this->sup_contact_name = $sup_contact_name;
 
         return $this;
     }
 
-    public function getPostalCode(): ?string
+    public function getSupPhone(): ?string
     {
-        return $this->PostalCode;
+        return $this->sup_phone;
     }
 
-    public function setPostalCode(?string $PostalCode): self
+    public function setSupPhone(string $sup_phone): self
     {
-        $this->PostalCode = $PostalCode;
+        $this->sup_phone = $sup_phone;
 
         return $this;
     }
 
-    public function getCountry(): ?string
+    public function getSupMail(): ?string
     {
-        return $this->Country;
+        return $this->sup_mail;
     }
 
-    public function setCountry(?string $Country): self
+    public function setSupMail(string $sup_mail): self
     {
-        $this->Country = $Country;
+        $this->sup_mail = $sup_mail;
 
         return $this;
     }
 
-    public function getPhone(): ?string
+    public function getCouId(): ?Countries
     {
-        return $this->Phone;
+        return $this->cou_id;
     }
 
-    public function setPhone(string $Phone): self
+    public function setCouId(?Countries $cou_id): self
     {
-        $this->Phone = $Phone;
-
-        return $this;
-    }
-
-    public function getFax(): ?string
-    {
-        return $this->Fax;
-    }
-
-    public function setFax(?string $Fax): self
-    {
-        $this->Fax = $Fax;
-
-        return $this;
-    }
-
-    public function getHomePage(): ?string
-    {
-        return $this->HomePage;
-    }
-
-    public function setHomePage(?string $HomePage): self
-    {
-        $this->HomePage = $HomePage;
+        $this->cou_id = $cou_id;
 
         return $this;
     }
@@ -224,27 +191,27 @@ class Suppliers
     /**
      * @return Collection|Products[]
      */
-    public function getProSupID(): Collection
+    public function getProSupId(): Collection
     {
-        return $this->ProSupID;
+        return $this->pro_sup_id;
     }
 
-    public function addProSupID(Products $proSupID): self
+    public function addProSupId(Products $proSupId): self
     {
-        if (!$this->ProSupID->contains($proSupID)) {
-            $this->ProSupID[] = $proSupID;
-            $proSupID->setProSupID($this);
+        if (!$this->pro_sup_id->contains($proSupId)) {
+            $this->pro_sup_id[] = $proSupId;
+            $proSupId->setSupId($this);
         }
 
         return $this;
     }
 
-    public function removeProSupID(Products $proSupID): self
+    public function removeProSupId(Products $proSupId): self
     {
-        if ($this->ProSupID->removeElement($proSupID)) {
+        if ($this->pro_sup_id->removeElement($proSupId)) {
             // set the owning side to null (unless already changed)
-            if ($proSupID->getProSupID() === $this) {
-                $proSupID->setProSupID(null);
+            if ($proSupId->getSupId() === $this) {
+                $proSupId->setSupId(null);
             }
         }
 

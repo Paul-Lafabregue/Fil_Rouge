@@ -20,63 +20,38 @@ class Customers
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=100)
+     * @ORM\Column(type="boolean")
      */
-    private $CompanyName;
+    private $cus_category;
 
     /**
-     * @ORM\Column(type="string", length=100)
+     * @ORM\Column(type="boolean")
      */
-    private $ContactName;
+    private $cus_payment_type;
 
     /**
-     * @ORM\Column(type="string", length=50, nullable=true)
+     * @ORM\Column(type="string", length=150, nullable=true)
      */
-    private $ContactTitle;
+    private $cus_reference;
 
     /**
-     * @ORM\Column(type="string", length=100, nullable=true)
+     * @ORM\ManyToOne(targetEntity=Professionals::class, inversedBy="cus_prf_id")
      */
-    private $Address;
+    private $prf_id;
 
     /**
-     * @ORM\Column(type="string", length=50, nullable=true)
+     * @ORM\ManyToOne(targetEntity=Particuliars::class, inversedBy="cus_par_id")
      */
-    private $City;
+    private $par_id;
 
     /**
-     * @ORM\Column(type="string", length=30, nullable=true)
+     * @ORM\OneToMany(targetEntity=Orders::class, mappedBy="cus_id", orphanRemoval=true)
      */
-    private $Region;
-
-    /**
-     * @ORM\Column(type="string", length=10, nullable=true)
-     */
-    private $PostalCode;
-
-    /**
-     * @ORM\Column(type="string", length=30, nullable=true)
-     */
-    private $Country;
-
-    /**
-     * @ORM\Column(type="string", length=24, nullable=true)
-     */
-    private $Phone;
-
-    /**
-     * @ORM\Column(type="string", length=24, nullable=true)
-     */
-    private $Fax;
-
-    /**
-     * @ORM\OneToMany(targetEntity=Orders::class, mappedBy="OrdCusID")
-     */
-    private $OrdCusID;
+    private $ord_cus_id;
 
     public function __construct()
     {
-        $this->OrdCusID = new ArrayCollection();
+        $this->ord_cus_id = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -84,122 +59,62 @@ class Customers
         return $this->id;
     }
 
-    public function getCompanyName(): ?string
+    public function getCusCategory(): ?bool
     {
-        return $this->CompanyName;
+        return $this->cus_category;
     }
 
-    public function setCompanyName(string $CompanyName): self
+    public function setCusCategory(bool $cus_category): self
     {
-        $this->CompanyName = $CompanyName;
+        $this->cus_category = $cus_category;
 
         return $this;
     }
 
-    public function getContactName(): ?string
+    public function getCusPaymentType(): ?bool
     {
-        return $this->ContactName;
+        return $this->cus_payment_type;
     }
 
-    public function setContactName(string $ContactName): self
+    public function setCusPaymentType(bool $cus_payment_type): self
     {
-        $this->ContactName = $ContactName;
+        $this->cus_payment_type = $cus_payment_type;
 
         return $this;
     }
 
-    public function getContactTitle(): ?string
+    public function getCusReference(): ?string
     {
-        return $this->ContactTitle;
+        return $this->cus_reference;
     }
 
-    public function setContactTitle(?string $ContactTitle): self
+    public function setCusReference(?string $cus_reference): self
     {
-        $this->ContactTitle = $ContactTitle;
+        $this->cus_reference = $cus_reference;
 
         return $this;
     }
 
-    public function getAddress(): ?string
+    public function getPrfId(): ?Professionals
     {
-        return $this->Address;
+        return $this->prf_id;
     }
 
-    public function setAddress(?string $Address): self
+    public function setPrfId(?Professionals $prf_id): self
     {
-        $this->Address = $Address;
+        $this->prf_id = $prf_id;
 
         return $this;
     }
 
-    public function getCity(): ?string
+    public function getParId(): ?Particuliars
     {
-        return $this->City;
+        return $this->par_id;
     }
 
-    public function setCity(?string $City): self
+    public function setParId(?Particuliars $par_id): self
     {
-        $this->City = $City;
-
-        return $this;
-    }
-
-    public function getRegion(): ?string
-    {
-        return $this->Region;
-    }
-
-    public function setRegion(?string $Region): self
-    {
-        $this->Region = $Region;
-
-        return $this;
-    }
-
-    public function getPostalCode(): ?string
-    {
-        return $this->PostalCode;
-    }
-
-    public function setPostalCode(?string $PostalCode): self
-    {
-        $this->PostalCode = $PostalCode;
-
-        return $this;
-    }
-
-    public function getCountry(): ?string
-    {
-        return $this->Country;
-    }
-
-    public function setCountry(?string $Country): self
-    {
-        $this->Country = $Country;
-
-        return $this;
-    }
-
-    public function getPhone(): ?string
-    {
-        return $this->Phone;
-    }
-
-    public function setPhone(?string $Phone): self
-    {
-        $this->Phone = $Phone;
-
-        return $this;
-    }
-
-    public function getFax(): ?string
-    {
-        return $this->Fax;
-    }
-
-    public function setFax(?string $Fax): self
-    {
-        $this->Fax = $Fax;
+        $this->par_id = $par_id;
 
         return $this;
     }
@@ -207,27 +122,27 @@ class Customers
     /**
      * @return Collection|Orders[]
      */
-    public function getOrdCusID(): Collection
+    public function getOrdCusId(): Collection
     {
-        return $this->OrdCusID;
+        return $this->ord_cus_id;
     }
 
-    public function addOrdCusID(Orders $ordCusID): self
+    public function addOrdCusId(Orders $ordCusId): self
     {
-        if (!$this->OrdCusID->contains($ordCusID)) {
-            $this->OrdCusID[] = $ordCusID;
-            $ordCusID->setOrdCusID($this);
+        if (!$this->ord_cus_id->contains($ordCusId)) {
+            $this->ord_cus_id[] = $ordCusId;
+            $ordCusId->setCusId($this);
         }
 
         return $this;
     }
 
-    public function removeOrdCusID(Orders $ordCusID): self
+    public function removeOrdCusId(Orders $ordCusId): self
     {
-        if ($this->OrdCusID->removeElement($ordCusID)) {
+        if ($this->ord_cus_id->removeElement($ordCusId)) {
             // set the owning side to null (unless already changed)
-            if ($ordCusID->getOrdCusID() === $this) {
-                $ordCusID->setOrdCusID(null);
+            if ($ordCusId->getCusId() === $this) {
+                $ordCusId->setCusId(null);
             }
         }
 

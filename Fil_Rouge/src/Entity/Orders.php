@@ -20,78 +20,44 @@ class Orders
     private $id;
 
     /**
-     * @ORM\Column(type="integer", nullable=true)
+     * @ORM\Column(type="datetime")
      */
-    private $EmployeeID;
+    private $ord_order_date;
 
     /**
-     * @ORM\Column(type="datetime", nullable=true)
+     * @ORM\Column(type="datetime")
      */
-    private $OrderDate;
+    private $ord_payment_date;
 
     /**
-     * @ORM\Column(type="datetime", nullable=true)
+     * @ORM\Column(type="date")
      */
-    private $RequiredDate;
+    private $ord_ship_date;
 
     /**
-     * @ORM\Column(type="datetime", nullable=true)
+     * @ORM\Column(type="datetime")
      */
-    private $ShippedDate;
+    private $ord_reception_date;
 
     /**
-     * @ORM\Column(type="integer", nullable=true)
+     * @ORM\Column(type="string", length=150)
      */
-    private $ShipVia;
+    private $ord_order_address;
 
     /**
-     * @ORM\Column(type="decimal", precision=10, scale=4, nullable=true)
+     * @ORM\ManyToOne(targetEntity=Customers::class, inversedBy="ord_cus_id")
+     * @ORM\JoinColumn(nullable=false)
      */
-    private $Freight;
+    private $cus_id;
 
     /**
-     * @ORM\Column(type="string", length=40)
+     * @ORM\OneToMany(targetEntity=OrdersDetails::class, mappedBy="ord_id", orphanRemoval=true)
      */
-    private $ShipName;
-
-    /**
-     * @ORM\Column(type="string", length=100, nullable=true)
-     */
-    private $string;
-
-    /**
-     * @ORM\Column(type="string", length=30, nullable=true)
-     */
-    private $ShipCity;
-
-    /**
-     * @ORM\Column(type="string", length=30, nullable=true)
-     */
-    private $ShipRegion;
-
-    /**
-     * @ORM\Column(type="string", length=10, nullable=true)
-     */
-    private $ShipPostalCode;
-
-    /**
-     * @ORM\Column(type="string", length=30, nullable=true)
-     */
-    private $ShipCountry;
-
-    /**
-     * @ORM\ManyToOne(targetEntity=Customers::class, inversedBy="OrdCusID")
-     */
-    private $OrdCusID;
-
-    /**
-     * @ORM\OneToMany(targetEntity=OrderDetails::class, mappedBy="OdeOrdID")
-     */
-    private $OdeOrdID;
+    private $ode_ord_id;
 
     public function __construct()
     {
-        $this->OdeOrdID = new ArrayCollection();
+        $this->ode_ord_id = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -99,186 +65,102 @@ class Orders
         return $this->id;
     }
 
-    public function getEmployeeID(): ?int
+    public function getOrdOrderDate(): ?\DateTimeInterface
     {
-        return $this->EmployeeID;
+        return $this->ord_order_date;
     }
 
-    public function setEmployeeID(?int $EmployeeID): self
+    public function setOrdOrderDate(\DateTimeInterface $ord_order_date): self
     {
-        $this->EmployeeID = $EmployeeID;
+        $this->ord_order_date = $ord_order_date;
 
         return $this;
     }
 
-    public function getOrderDate(): ?\DateTimeInterface
+    public function getOrdPaymentDate(): ?\DateTimeInterface
     {
-        return $this->OrderDate;
+        return $this->ord_payment_date;
     }
 
-    public function setOrderDate(?\DateTimeInterface $OrderDate): self
+    public function setOrdPaymentDate(\DateTimeInterface $ord_payment_date): self
     {
-        $this->OrderDate = $OrderDate;
+        $this->ord_payment_date = $ord_payment_date;
 
         return $this;
     }
 
-    public function getRequiredDate(): ?\DateTimeInterface
+    public function getOrdShipDate(): ?\DateTimeInterface
     {
-        return $this->RequiredDate;
+        return $this->ord_ship_date;
     }
 
-    public function setRequiredDate(?\DateTimeInterface $RequiredDate): self
+    public function setOrdShipDate(\DateTimeInterface $ord_ship_date): self
     {
-        $this->RequiredDate = $RequiredDate;
+        $this->ord_ship_date = $ord_ship_date;
 
         return $this;
     }
 
-    public function getShippedDate(): ?\DateTimeInterface
+    public function getOrdReceptionDate(): ?\DateTimeInterface
     {
-        return $this->ShippedDate;
+        return $this->ord_reception_date;
     }
 
-    public function setShippedDate(?\DateTimeInterface $ShippedDate): self
+    public function setOrdReceptionDate(\DateTimeInterface $ord_reception_date): self
     {
-        $this->ShippedDate = $ShippedDate;
+        $this->ord_reception_date = $ord_reception_date;
 
         return $this;
     }
 
-    public function getShipVia(): ?int
+    public function getOrdOrderAddress(): ?string
     {
-        return $this->ShipVia;
+        return $this->ord_order_address;
     }
 
-    public function setShipVia(?int $ShipVia): self
+    public function setOrdOrderAddress(string $ord_order_address): self
     {
-        $this->ShipVia = $ShipVia;
+        $this->ord_order_address = $ord_order_address;
 
         return $this;
     }
 
-    public function getFreight(): ?string
+    public function getCusId(): ?Customers
     {
-        return $this->Freight;
+        return $this->cus_id;
     }
 
-    public function setFreight(?string $Freight): self
+    public function setCusId(?Customers $cus_id): self
     {
-        $this->Freight = $Freight;
-
-        return $this;
-    }
-
-    public function getShipName(): ?string
-    {
-        return $this->ShipName;
-    }
-
-    public function setShipName(string $ShipName): self
-    {
-        $this->ShipName = $ShipName;
-
-        return $this;
-    }
-
-    public function getString(): ?string
-    {
-        return $this->string;
-    }
-
-    public function setString(?string $string): self
-    {
-        $this->string = $string;
-
-        return $this;
-    }
-
-    public function getShipCity(): ?string
-    {
-        return $this->ShipCity;
-    }
-
-    public function setShipCity(?string $ShipCity): self
-    {
-        $this->ShipCity = $ShipCity;
-
-        return $this;
-    }
-
-    public function getShipRegion(): ?string
-    {
-        return $this->ShipRegion;
-    }
-
-    public function setShipRegion(?string $ShipRegion): self
-    {
-        $this->ShipRegion = $ShipRegion;
-
-        return $this;
-    }
-
-    public function getShipPostalCode(): ?string
-    {
-        return $this->ShipPostalCode;
-    }
-
-    public function setShipPostalCode(?string $ShipPostalCode): self
-    {
-        $this->ShipPostalCode = $ShipPostalCode;
-
-        return $this;
-    }
-
-    public function getShipCountry(): ?string
-    {
-        return $this->ShipCountry;
-    }
-
-    public function setShipCountry(?string $ShipCountry): self
-    {
-        $this->ShipCountry = $ShipCountry;
-
-        return $this;
-    }
-
-    public function getOrdCusID(): ?Customers
-    {
-        return $this->OrdCusID;
-    }
-
-    public function setOrdCusID(?Customers $OrdCusID): self
-    {
-        $this->OrdCusID = $OrdCusID;
+        $this->cus_id = $cus_id;
 
         return $this;
     }
 
     /**
-     * @return Collection|OrderDetails[]
+     * @return Collection|OrdersDetails[]
      */
-    public function getOdeOrdID(): Collection
+    public function getOdeOrdId(): Collection
     {
-        return $this->OdeOrdID;
+        return $this->ode_ord_id;
     }
 
-    public function addOdeOrdID(OrderDetails $odeOrdID): self
+    public function addOdeOrdId(OrdersDetails $odeOrdId): self
     {
-        if (!$this->OdeOrdID->contains($odeOrdID)) {
-            $this->OdeOrdID[] = $odeOrdID;
-            $odeOrdID->setOdeOrdID($this);
+        if (!$this->ode_ord_id->contains($odeOrdId)) {
+            $this->ode_ord_id[] = $odeOrdId;
+            $odeOrdId->setOrdId($this);
         }
 
         return $this;
     }
 
-    public function removeOdeOrdID(OrderDetails $odeOrdID): self
+    public function removeOdeOrdId(OrdersDetails $odeOrdId): self
     {
-        if ($this->OdeOrdID->removeElement($odeOrdID)) {
+        if ($this->ode_ord_id->removeElement($odeOrdId)) {
             // set the owning side to null (unless already changed)
-            if ($odeOrdID->getOdeOrdID() === $this) {
-                $odeOrdID->setOdeOrdID(null);
+            if ($odeOrdId->getOrdId() === $this) {
+                $odeOrdId->setOrdId(null);
             }
         }
 
