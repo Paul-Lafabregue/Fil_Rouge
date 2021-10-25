@@ -25,7 +25,7 @@ class Suppliers
     private $sup_company_name;
 
     /**
-     * @ORM\Column(type="boolean")
+     * @ORM\Column(type="string", length="10")
      */
     private $sup_type;
 
@@ -75,6 +75,11 @@ class Suppliers
         $this->pro_sup_id = new ArrayCollection();
     }
 
+    public function __toString()
+    {
+        return $this->id;
+    }
+
     public function getId(): ?int
     {
         return $this->id;
@@ -92,12 +97,12 @@ class Suppliers
         return $this;
     }
 
-    public function getSupType(): ?bool
+    public function getSupType(): ?string
     {
         return $this->sup_type;
     }
 
-    public function setSupType(bool $sup_type): self
+    public function setSupType(string $sup_type): self
     {
         $this->sup_type = $sup_type;
 

@@ -86,6 +86,7 @@ class Products
      */
     private $ode_pro_id;
 
+    
     public function __construct()
     {
         $this->ode_pro_id = new ArrayCollection();

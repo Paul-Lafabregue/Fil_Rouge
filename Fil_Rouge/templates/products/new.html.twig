@@ -1,17 +1,19 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Nouveau Products{% endblock %}
+{% block title %}New Products{% endblock %}
 
 {% block body %}
 
-    <h1>Ajout d'un nouveaux produit</h1>
+    <h1 class="text-center m-5 ff-2">Ajouter un nouveau produit</h1>    
+    
+    <div class="bg-body p-4 border border-4 border-warning" style="border-radius: 1rem;">
 
+        {{ include('products/_form.html.twig') }}
 
-    {{ include('products/_form.html.twig') }}
-
-    <div class="col-md-8 text-center">
-        <a href="{{ path('products_index') }}" class="btn btn-secondary">Retour à la liste</a>
+            <div class="col-md-8 text-center">
+                <a href="{{ path('products_index') }}" class="btn btn-secondary">Retour à la liste</a>
+            </div>
+        </div>
     </div>
-</div>
 
 {% endblock %}
