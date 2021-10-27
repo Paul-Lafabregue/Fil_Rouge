@@ -15,6 +15,9 @@ use Symfony\Component\Form\Extension\Core\Type\TextType; // Ajoute un TypeText a
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType; // Ajoute un EntityType au champ //
+use Symfony\Component\Form\Extension\Core\Type\FileType; // Ajoute un FileType au champ Image // 
+use Symfony\Component\Validator\Constraints\Image; // Ajoute Image au champ Image //
+
 
 class ProductsType extends AbstractType
 {
@@ -42,7 +45,7 @@ class ProductsType extends AbstractType
                 ],
                 'constraints' => [
                     new Regex([
-                        'pattern' => '/^[A-Za-zéèàçâêûîôäëüïö\_\-\s]+$/',
+                        'pattern' => '/^[A-Za-z0-9éèàçâêûîôäëüïö\_\-\s]+$/',
                         'message' => 'Caratère(s) non valide(s)'
                     ]),
                     new NotBlank([
@@ -64,19 +67,6 @@ class ProductsType extends AbstractType
                     ]),
                     new NotBlank([
                         'message' => 'Veuillez saisir la référence du jeu !'
-                    ]),
-                ]
-            ])
-
-            // Champ image du produit //
-            ->add('pro_picture', TextType::class, [
-                'label' => 'Image du jeu',
-                'attr' => [
-                    'placeholder' => 'Type de image (ex : png)',
-                ],
-                'constraints' => [
-                    new NotBlank([
-                        'message' => 'Veuillez saisir le type de image !'
                     ]),
                 ]
             ])
@@ -207,6 +197,23 @@ class ProductsType extends AbstractType
                 ]
             ])
 
+            // Champ Image //
+            ->add('pro_picture', FileType::class, [
+                'label' => 'Image',
+                'help' => 'Choissisez ici la photo du produit',
+                //unmapped => fichier non associé à aucune propriété d'entité, validation impossible avec les annotations
+                'mapped' => false,
+                'multiple' => false,
+                // pour éviter de recharger la photo lors de l'édition du profil
+                'required' => false,
+                'constraints' => [
+                    new Image([
+                        'maxSize' => '2000k',
+
+                        'mimeTypesMessage' => 'Veuillez insérer une photo au format jpg, jpeg ou png'
+                    ]),
+                ]
+            ])
         ;
     }
 

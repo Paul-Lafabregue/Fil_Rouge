@@ -4,8 +4,10 @@
 
 {% block body %}
     
-    <h1 class="text-center m-5 ff-2">Modifier le produit</h1>    
-    
+    <div class="bgn mb-3 p-4">
+        <h1 class="text-center text-warning">Modifier le produit</h1>
+    </div>
+
     <div class="bg-body p-4 border border-4 border-warning rounded">
 
         {{ include('products/_form.html.twig', {'button_label': 'Modifier'}) }}

@@ -4,6 +4,8 @@ namespace App\Controller;
 
 use App\Entity\Products;
 use App\Repository\ProductsRepository;
+use App\Repository\CategoriesRepository;
+
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\HttpFoundation\Response;
@@ -15,7 +17,7 @@ class CartController extends AbstractController
     /**
      * @Route("/cart", name="cart_index")
      */
-    public function index(SessionInterface $session, ProductsRepository $productsRepository): Response
+    public function index(SessionInterface $session, ProductsRepository $productsRepository, CategoriesRepository $categoriesRepository): Response
     {
         $panier = $session->get("panier", []);
 
@@ -31,7 +33,12 @@ class CartController extends AbstractController
             ];
             $total += $product->getProPrice() * $quantite;
         }
-        return $this->render('cart/index.html.twig', compact("dataPanier", "total"));
+        
+        return $this->render('cart/index.html.twig', [
+            'dataPanier' => $dataPanier,
+            'total' => $total,
+            'categories' => $categoriesRepository->findAll(),
+        ]);
     }
 
     /**

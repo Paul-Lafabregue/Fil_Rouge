@@ -5,6 +5,8 @@ namespace App\Controller;
 use App\Entity\Users;
 use App\Form\RegistrationFormType;
 use App\Security\UsersAuthenticator;
+use App\Repository\CategoriesRepository;
+
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -17,7 +19,7 @@ class RegistrationController extends AbstractController
     /**
      * @Route("/register", name="app_register")
      */
-    public function register(Request $request, UserPasswordEncoderInterface $userPasswordEncoderInterface, GuardAuthenticatorHandler $guardHandler, UsersAuthenticator $authenticator): Response
+    public function register(Request $request, UserPasswordEncoderInterface $userPasswordEncoderInterface, GuardAuthenticatorHandler $guardHandler, UsersAuthenticator $authenticator, CategoriesRepository $categoriesRepository): Response
     {
         $user = new Users();
         $form = $this->createForm(RegistrationFormType::class, $user);
@@ -47,6 +49,7 @@ class RegistrationController extends AbstractController
 
         return $this->render('registration/register.html.twig', [
             'registrationForm' => $form->createView(),
+            'categories' => $categoriesRepository->findAll(),
         ]);
     }
 }

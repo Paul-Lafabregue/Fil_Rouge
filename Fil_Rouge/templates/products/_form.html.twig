@@ -15,32 +15,25 @@
     </div>
     <div class="row mb-4">
         {# Reprend l'éléments CategoryID #}
-        <div class="form-group col-md-4">
+        <div class="form-group col-md-6">
             {{ form_row(form.cat_id) }}
         </div>
-
-        {# Reprend l'éléments Quantité Par Unité #}
-        <div class="form-group col-md-4">
-            {{ form_row(form.pro_vat) }}
-        </div>
-
-        {# Reprend l'éléments  Prix Unitaire#}
-        <div class="form-group col-md-4">
+        {# Reprend l'éléments Référence #}
+        <div class="form-group col-md-6">
             {{ form_row(form.pro_ref) }}
         </div>
     </div>
     <div class="row mb-4">    
+        {# Reprend l'éléments TVA #}
+        <div class="form-group col-md-4">
+            {{ form_row(form.pro_vat) }}
+        </div>
         <div class="form-group col-md-4">
             {{ form_row(form.pro_price) }}
         </div>
         {# Reprend l'éléments Quantité En Stock #}
         <div class="form-group col-md-4">
             {{ form_row(form.pro_stock) }}
-        </div>
-
-        {# Reprend l'éléments Quantité En Commande #}
-        <div class="form-group col-md-4">
-            {{ form_row(form.pro_picture) }}
         </div>
     </div>
     <div class="row mb-4">
@@ -52,6 +45,10 @@
         <div class="form-group col-md-4">
             {{ form_row(form.pro_description) }}
         </div>
+        {# Reprend l'éléments picture #}
+        <div class="form-group col-md-4">
+            {{ form_row(form.pro_picture) }}
+        </div>
     </div>
     <div class="row mb-4">
         <div class="form-group col-md-6">
@@ -61,6 +58,7 @@
         <div class="form-group col-md-6">
             {{ form_row(form.pro_date_modif) }}
         </div>
+
     </div>
 
     <br>
