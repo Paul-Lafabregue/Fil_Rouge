@@ -16,12 +16,12 @@
 		<style>
 
 			body {
-				background-color: rgb(192, 190, 190);
-				/* background-image:url(/images/fond.jpg);
-                background-repeat: no-repeat;
-                background-attachment:fixed;
-                height: 90%;
-                background-size: cover; */
+				background-color: #ffffffa1;
+				/* background-image: url('/images/fond.jpg');
+				background-repeat: no-repeat;
+				background-attachment: fixed;
+				height: 90%;
+				background-size: cover; */
 			}
 		</style>
 
@@ -30,10 +30,9 @@
 	<body>
 
 		<!-- NAVBAR -->
-		<div class="bgn fixed-top">
+		<div class="bgn fixed-top" style="z-index: 4;">
 			<nav class="container navbar navbar-expand-lg navbar-dark">
 				<img class="me-3" src="/images/logo.png" alt="logo" style="max-width: 200px; height: auto;">
-				{# <a class="ff nav-link nav-item me-3 text-light" href="{{ path('home') }}">A & P Games</a> #}
 				<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
 					<span class="bi-view-list"></span>
 				</button>
@@ -41,15 +40,18 @@
 					<ul class="navbar-nav me-auto">
 						<li class="nav-item me-3">
 							<a class="nav-link" href="{{ path('home') }}">
-								<i class="bi bi-house fs-4"></i> Accueil</a>
+								<i class="bi bi-house fs-4"></i>
+								Accueil</a>
 						</li>
 						<li class="nav-item me-3">
 							<a class="nav-link" href="{{ path('products_index') }}">
-								<i class="bi bi-shop-window fs-4"></i> Boutique</a>
+								<i class="bi bi-shop-window fs-4"></i>
+								Boutique</a>
 						</li>
 						<li class="nav-item me-3 dropdown">
 							<a class="nav-link" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-								<i class="bi bi-list fs-4"></i> Categories</a>
+								<i class="bi bi-list fs-4"></i>
+								Categories</a>
 							<ul class="dropdown-menu" aria-labelledby="navbarDropdown">
 								{% for category in categories %}
 									<li>
@@ -70,47 +72,51 @@
 								</a>
 								<ul class="dropdown-menu" aria-labelledby="navbarDropdown">
 									<li>
-										<a class="dropdown-item disabled text-dark" href="#"><b>{{ app.user.username }}</b></a>                               
+										<a class="dropdown-item disabled text-dark" href="#">
+											<b>{{ app.user.username }}</b>
+										</a>
 									</li>
 									<li>
 										<a class="dropdown-item" href="#">Mon perfil</a>
 									</li>
 									<li>
-										<a class="dropdown-item" href="{{ path('app_logout') }}"> Déconnection</a>
+										<a class="dropdown-item" href="{{ path('app_logout') }}">
+											Déconnection</a>
 									</li>
 								</ul>
 							</li>
 						{% else %}
 							<li class="nav-item">
 								<a class="nav-link" href="{{ path("app_login") }}">
-									<i class="bi bi-person"></i> Connection</a>
+									<i class="bi bi-person fs-4"></i>
+									Connection</a>
 							</li>
 						{% endif %}
 					</ul>
 				</div>
 			</nav>
-            <div class="container mb-3">
-                <form class="nav-item">
-                    <div class="input-group">
-                        <input class="form-control shadow-none border-white" type="search" placeholder="Rechercher un jeu" aria-label="Search">
-                        <button class="btn btn-outline-light" type="submit">
-                            <i class="bi bi-search"></i>
-                        </button>
-                    </div>
-                </form>
-            </div>
-            {# <div class="p-1 bg-light"></div> #}
-		</div>
-		<div class="p-5"></div>
-        
-
-
-		{% for message in app.flashes('success') %}
-			<div class="alert alert-success">
-				{{ message }}
+			<div class="container mb-3">
+				<form class="nav-item">
+					<div class="input-group">
+						<input class="form-control shadow-none border-white" type="search" placeholder="Rechercher un jeu" aria-label="Search">
+						<button class="btn btn-outline-light" type="submit">
+							<i class="bi bi-search"></i>
+						</button>
+					</div>
+				</form>
 			</div>
-		{% endfor %}
+			{# <div class="p-1 bg-light"></div> #}
+		</div>
+		{# <div class="p-5"></div> #}
+		<div style="min-height: 141px;">
 
+
+			{% for message in app.flashes('success') %}
+				<div class="alert alert-success">
+					{{ message }}
+				</div>
+			{% endfor %}
+		</div>
 
 		{% block body %}{% endblock %}
 

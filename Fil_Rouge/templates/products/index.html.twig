@@ -1,50 +1,90 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Liste des jeux{% endblock %}
+{% block title %}Liste des jeux
+{% endblock %}
 
 {% block body %}
-    
-    <div class="bgn mt-5 mb-3 p-3 text-center text-white">
-        <h3>Bienvenu dans notre Boutique</h3>
-        {# <h4>Faites-vous plaisir !</h4> #}
-    </div>
+	{#     
+	    <div id="carouselExampleFade" class="carousel slide carousel-fade" data-bs-ride="carousel">
+	        <div class="carousel-inner p-5">
+	            <div class="carousel-item active">
+	            <img src="..." class="d-block w-100" alt="...">
+	            </div>
+	            <div class="carousel-item">
+	            <img src="..." class="d-block w-100" alt="...">
+	            </div>
+	            <div class="carousel-item">
+	            <img src="..." class="d-block w-100" alt="...">
+	            </div>
+	        </div>
+	        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="prev">
+	            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+	            <span class="visually-hidden">Previous</span>
+	        </button>
+	        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="next">
+	            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+	            <span class="visually-hidden">Next</span>
+	        </button>
+	    </div> #}
 
-<div class="container"> 
+	<div class="bgn mb-3 p-3 text-center text-white">
+		<h3>Bienvenu dans notre Boutique</h3>
+		{# <h4>Faites-vous plaisir !</h4> #}
+	</div>
 
-    <div class="row row-cols-2 row-cols-lg-4 g-4">
-        
-        {% for product in products %}
+	<div class="container">
 
-            <div class="col">
-                <div class="card h-100 border-0">
-                    <div class="row g-0">
-                        <div class="col-md-12 text-center">
-                            <img src="/images/photos_jeux/{{ product.proPicture }}" style="max-height: 18em;" class="p-2 img-fluid rounded" alt="imgJeu">
-                        </div>
-                        <div class="col-md-12">
-                            <div class="p-0 card-body text-center ms-3 me-3">
-                                <p>{{ product.proName }}</p>                                                                  
-                                <p class="text-success fs-5">{{ product.proPrice }} €</p>
-                            </div>
-                            <div class="card-footer row-cols-3 d-flex justify-content-espace-between">
-                                <a class="text-info" href="{{ path('products_show', {'id': product.id}) }}"><i class="bi bi-eye fs-4"></i></a>
-                                {% if app.user %}
-                                    <a class="text-warning" href="{{ path('products_edit', {'id': product.id}) }}"><i class="bi bi-pen fs-4"></i></a>
-                                {% endif %}
-                                <a class="text-success" href="{{ path("cart_add", {'id': product.id}) }}"><i class="bi bi-bag-plus fs4-"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        {% else %}
-            Pas de jeu trouvé
-        {% endfor %}
+		<div class="row row-cols-3 row-cols-lg-4 g-4">
 
-    </div>
+			{% for product in products %}
 
-    <a class="btn btn-success p-3" href="{{ path('products_new') }}"><i class="bi bi-plus-square"></i> Ajouter un produit</a>
+				<div class="col">
+					<div class="card h-100 border-0 ">
+						<div class="row g-0 shadow-lg bg-body rounded">
+							<div class="col-md-12 text-center">
+								<img src="/images/photos_jeux/{{ product.proPicture }}" style="max-height: 18em;" class="p-2 img-fluid rounded" alt="imgJeu">
+							</div>
+							<div class="col-md-12">
+								<div class="p-0 card-body text-center ms-3 me-3">
+									<p>{{ product.proName }}</p>
+									<p class="text-success fs-5">{{ product.proPrice }}
+										€</p>
+								</div>
+								<div class="card-footer row row-cols-3 ms-1 me-1 bgn">
+									<div class="col text-center">
+										<a class="text-warning" href="{{ path('products_show', {'id': product.id}) }}">
+											<i class="bi bi-eye fs-3"></i>
+										</a>
+									</div>
+									{% if app.user %}
+										<div class="col text-center">
+											<a class="text-white" href="{{ path('products_edit', {'id': product.id}) }}">
+												<i class="bi bi-pen fs-3"></i>
+											</a>
+										</div>
+									{% else %}
+										<div class="col text-center"></div>
+									{% endif %}
+									<div class="col text-center">
+										<a class="text-success" href="{{ path("cart_add", {'id': product.id}) }}">
+											<i class="bi bi-bag-plus fs-3"></i>
+										</a>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			{% else %}
+				Pas de jeu trouvé
+			{% endfor %}
 
-</div>
+		</div>
+
+		<a class="btn btn-success p-3" href="{{ path('products_new') }}">
+			<i class="bi bi-plus-square"></i>
+			Ajouter un produit</a>
+
+	</div>
 
 {% endblock %}
