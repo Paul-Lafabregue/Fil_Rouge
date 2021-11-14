@@ -1,0 +1,58 @@
+{% extends 'base_admin.html.twig' %}
+
+{% block title %}Liste de produits
+{% endblock %}
+
+{% block body %}
+
+<div class="d-flex flex-column flex-shrink-0 m-2">    
+            
+    <div class="bgn mb-3 p-2 text-white d-flex justify-content-between">
+        <h4 class="text-start align-items-center"  style="border-radius: 10px;">Produits</h4>
+        <a href="{{ path('admin_new_product')}}" class="text-end btn btn-outline-info">Create new</a>
+    </div>
+
+    <table class="table table-secondary table-striped text-center">
+        <thead>
+            <tr class="bgn">
+                <th>Image</th>
+                <th>ID</th>
+                <th>Nom</th>
+                <th>Prix</th>
+                <th>TVA</th>
+                <th>Référence</th>
+                <th>Stock</th>
+                <th>Date d'ajout</th>
+                <th>Date de modif</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for product in products %}
+            <tr>
+                <td><a href="{{ path('products_show', {'id': product.id}) }}"><img src="../images/photos_jeux/{{ product.proPicture }}" alt="{{  product.proName }}" class="img-cart img-fluid" width="50rem"></a></td>
+                <td>{{ product.id }}</td>
+                <td><a href="{{ path('admin_show_product', {'id': product.id}) }}" class="text-decoration-none text-info">{{ product.proName }}</a></td>
+                <td>{{ product.proPrice }}</td>
+                <td>{{ product.proVat }}</td>
+                <td>{{ product.proRef }}</td>
+                <td>{{ product.proStock }}</td>
+                <td>{{ product.proDateAdd ? product.proDateAdd|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ product.proDateModif ? product.proDateModif|date('Y-m-d H:i:s') : '' }}</td>
+                <td class="align-items-center">
+                    <a href="{{ path('admin_show_product', {'id': product.id}) }}"><i class="bi bi-eye text-info fs-5"></i></a>
+                    <a href="{{ path('admin_edit_product', {'id': product.id}) }}"><i class="bi bi-pen text-info fs-5"></i></a> 
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="12">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    </div>
+
+		
+{% endblock %}

@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+	<head>
+		<meta charset="UTF-8">
+		<title>
+			{% block title %}{% endblock %}
+		</title>
+
+		{% block stylesheets %}
+			<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+			<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+			<link rel="stylesheet" href="{{ asset('css/style.css') }}">
+		{% endblock %}
+
+	</head>
+
+	<body>
+
+		{# ========  ======== #}
+
+		{% for message in app.flashes('success') %}
+			<div class="container mt-2 alert alert-success">
+				{{ message }}
+			</div>
+		{% endfor %}
+
+
+		<div class="row">
+			<div class="col-md-2 col-sm-12 bgn pt-3 ps-3 pe-0 d-flex flex-column">
+				<a href="/" class="d-flex justify-content-center">
+					<img src="/images/logo.png" alt="logo" style="max-width: 150px; height: auto;">
+				</a>
+				<hr class="text-white m-3">
+				<ul class="nav nav-pills flex-column mb-auto">
+
+					<li class="nav-item">
+						<a href="{{ path('admin_index') }}" class="nav-link text-white">Home</a>
+					</li>
+
+					<div class="bg-transparent border-0 accordion-item text-white">
+						<h2 class="accordion-header" id="flush-headingOne">
+							<button class="p-0 pe-3 bg-transparent border-0 shadow-none accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+                            	<span class="nav-link text-white mb-0">Catalog</span>
+							</button>
+						</h2>
+						<div id="flush-collapseOne" class="accordion-collapse bg2 collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
+							<div class="accordion-body pt-0 pb-0 ps-4">
+								 <ul class="navbar-nav">
+									<li class="nav-item">
+										<a href="{{ path('admin_products') }}" class="nav-link text-white">Produits</a>
+									</li>
+									<li class="nav-item">
+										<a href="#" class="nav-link text-white">Catégories</a>
+									</li>
+									<li class="nav-item">
+										<a href="#" class="nav-link text-white">Fournisseurs</a>
+									</li>
+									<li class="nav-item">
+										<a href="#" class="nav-link text-white">Exemple</a>
+									</li>
+									<li class="nav-item">
+										<a href="#" class="nav-link text-white">Exemple</a>
+									</li>
+									<li class="nav-item">
+										<a href="#" class="nav-link text-white">Exemple</a>
+									</li>
+									<li class="nav-item">
+										<a href="#" class="nav-link text-white">Exemple</a>
+									</li>
+                            	</ul>
+							</div>
+						</div>
+					</div>
+					<div class="bg-transparent border-0 accordion-item text-white">
+						<h2 class="accordion-header" id="flush-headingTwo">
+						<button class="p-0 pe-3 bg-transparent border-0 shadow-none accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">
+							<p class="nav-link text-white mb-0">Users</p>
+						</button>
+						</h2>
+						<div id="flush-collapseTwo" class="accordion-collapse collapse bg2" aria-labelledby="flush-headingTwo" data-bs-parent="#accordionFlushExample">
+							<div class="accordion-body  pt-0 pb-0 ps-4">
+								<ul class="navbar-nav bgn2">
+									<li class="nav-item">
+										<a href="{{ path('user_index') }}" class="nav-link text-white">Gérer users</a>
+									</li>
+									<li class="nav-item">
+										<a href="#" class="nav-link text-white">Exemple</a>
+									</li>
+									<li class="nav-item">
+										<a href="#" class="nav-link text-white">Exemple</a>
+									</li>
+									<li class="nav-item">
+										<a href="#" class="nav-link text-white">Exemple</a>
+									</li>
+									<li class="nav-item">
+										<a href="#" class="nav-link text-white">Exemple</a>
+									</li>
+								</ul>
+							</div>
+						</div>
+					</div>
+					<div class="bg-transparent border-0 accordion-item text-white">
+						<h2 class="accordion-header" id="flush-headingThree">
+						<button class="p-0 pe-3 bg-transparent border-0 shadow-none accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseThree" aria-expanded="false" aria-controls="flush-collapseThree">
+							<p class="nav-link text-white mb-0">Exemple</p>
+						</button>
+						</h2>
+						<div id="flush-collapseThree" class="accordion-collapse collapse bg2" aria-labelledby="flush-headingThree" data-bs-parent="#accordionFlushExample">
+							<div class="accordion-body pt-0 pb-0 ps-4">
+								<ul class="navbar-nav bgn2">
+									<li class="nav-item">
+										<a href="#" class="nav-link text-white">Exemple</a>
+									</li>
+									<li class="nav-item">
+										<a href="#" class="nav-link text-white">Exemple</a>
+									</li>
+									<li class="nav-item">
+										<a href="#" class="nav-link text-white">Exemple</a>
+									</li>
+									<li class="nav-item">
+										<a href="#" class="nav-link text-white">Exemple</a>
+									</li>
+								</ul>
+							</div>
+						</div>
+					</div>
+
+					<li class="nav-item">
+						<a href="#" class="nav-link text-white">Exemple</a>
+					</li>
+				</ul>
+
+				<hr class="text-white m-3 fs-1">
+
+				<div class="dropdown m-3">
+					<a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
+						<strong>{{ app.user.username }} </strong>
+					</a>
+					<ul class="dropdown-menu dropdown-menu-dark text-small shadow" aria-labelledby="dropdownUser1">
+						<li><a class="dropdown-item" href="#">Settings</a></li>
+						<li><a class="dropdown-item" href="{{ path("profil") }}">Profil</a></li>
+						<li><hr class="dropdown-divider"></li>
+						<li><a class="dropdown-item" href="{{ path("app_login") }}">Déconnection</a></li>
+					</ul>
+				</div>
+			</div>
+			<div class="col-md-10 col-sm-12">
+				{% block body %}{% endblock %}
+			</div>
+
+		</div>
+
+
+
+		{% block javascripts %}
+			<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+		{% endblock %}
+
+		</body>
+
+	</html>

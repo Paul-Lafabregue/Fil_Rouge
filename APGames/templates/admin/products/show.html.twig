@@ -1,0 +1,78 @@
+{% extends 'base_admin.html.twig' %}
+
+{% block title %}Products{% endblock %}
+
+{% block body %}
+
+    <div class="row mt-5 p-3">
+
+        <div class="col-md-4">
+            <img class="p-2 img-responsive"  src="/images/photos_jeux/{{ product.proPicture }}" style="max-width: 25rem; border-radius: 18px;" alt="imgJeu">
+        </div>
+
+        <div class="col-md-8">
+            <div class="col-md-12 p-3">
+                <table class="table">
+                    <tbody>
+                        <tr>
+                            <th>Id du jeu : </th>
+                            <td>{{ product.id }}</td>
+                        </tr>
+                        <tr>
+                            <th>Nom : </th>
+                            <td>{{ product.proName }}</td>
+                        </tr>
+                        <tr>
+                            <th>Prix : </th>
+                            <td>{{ product.proPrice }}</td>
+                        </tr>
+                        <tr>
+                            <th>TVA : </th>
+                            <td>{{ product.proVat }}</td>
+                        </tr>
+                        <tr>
+                            <th>Pro_ref</th>
+                            <td>{{ product.proRef }}</td>
+                        </tr>
+                        <tr>
+                            <th>Stock : </th>
+                            <td>{{ product.proStock }}</td>
+                        </tr>
+                        <tr>
+                            <th>Libéllé : </th>
+                            <td>{{ product.proWording }}</td>
+                        </tr>
+                        <tr>
+                            <th>Description : </th>
+                            <td>{{ product.proDescription }}</td>
+                        </tr>
+                        <tr>
+                            <th>Date d'ajout</th>
+                            <td>{{ product.proDateAdd ? product.proDateAdd|date('Y-m-d H:i:s') : '' }}</td>
+                        </tr>
+                        <tr>
+                            <th>Date de modification</th>
+                            <td>{{ product.proDateModif ? product.proDateModif|date('Y-m-d H:i:s') : '' }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class=" row col-md-12">
+                <div class="col-md-4 text-center">
+                    <a href="{{ path('admin_products') }}" class="btn btn btn-secondary">Retour à la liste</a>
+                </div>
+
+                <div class="col-md-4 text-center">
+                    <a href="{{ path('admin_edit_product', {'id': product.id}) }}" class="btn btn btn-warning">Editer</a>
+                </div>
+
+                <div class="col-md-4 text-center">
+                    {{ include('admin/products/_delete_form.html.twig') }}
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+{% endblock %}

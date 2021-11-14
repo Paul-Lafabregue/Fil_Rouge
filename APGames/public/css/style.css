@@ -1,0 +1,27 @@
+
+html {
+    min-height:100%;
+    position:relative;
+}
+
+:root 
+{
+    --color1: #243035;
+    --color2: #d9dadc0c;
+}
+
+
+
+.bgn{
+    background-color: var(--color1);
+}
+
+.bg2{
+    background-color: var(--color2);
+}
+
+
+@media screen and (max-width: 1024px) 
+{ 
+
+}

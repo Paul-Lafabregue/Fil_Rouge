@@ -1,0 +1,57 @@
+{% extends 'base_admin.html.twig' %}
+
+{% block title %}User index{% endblock %}
+
+{% block body %}
+
+<div class="d-flex flex-column flex-shrink-0">    
+            
+    <div class="bgn mb-3 mt-2 p-2 text-white d-flex justify-content-between">
+        <h4 class="text-start align-items-center"  style="border-radius: 10px;">Users</h4>
+        {# <a href="{{ path('user_new') }}" class="text-end btn btn-outline-info">Add new</a> #}
+    </div>
+
+    <table class="table table-secondary table-striped text-center">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Email</th>
+                <th>Roles</th>
+                <th>Password</th>
+                <th>IsVerified</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for user in users %}
+            <tr>
+                <td>{{ user.id }}</td>
+                <td>{{ user.email }}</td>
+                <td>
+                    {# On boucle sur les rôles #}
+                    {% for role in user.roles %}
+                        {% if role == "ROLE_USER" %}
+                            Utilisateur
+                        {% elseif role == "ROLE_EDITOR" %}
+                            Editeur
+                        {% elseif role == "ROLE_ADMIN" %}
+                            Administrateur
+                        {% endif %}
+                    {% endfor %}
+                </td>
+                <td>{{ user.password }}</td>
+                <td>{{ user.isVerified ? 'Yes' : 'No' }}</td>
+                <td>
+                    <a href="{{ path('user_show', {'id': user.id}) }}"><i class="bi bi-eye text-info fs-5"></i></a>
+                    <a href="{{ path('user_edit', {'id': user.id}) }}"><i class="bi bi-pen text-info fs-5"></i></a> 
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="6">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+{% endblock %}

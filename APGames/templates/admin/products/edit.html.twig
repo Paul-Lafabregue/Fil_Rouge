@@ -1,0 +1,26 @@
+{% extends 'base_admin.html.twig' %}
+
+{% block title %}Edit Products{% endblock %}
+
+{% block body %}
+
+    <div class="bgn m-2 p-2 text-white d-flex justify-content-between">
+        <h4 class="text-start align-items-center"  style="border-radius: 10px;">Editer le produit</h4>
+	</div>
+
+    <div class="bg-body m-2 p-4 shadow">
+
+        {{ include('admin/products/_form.html.twig', {'button_label': 'Souvegarder'}) }}
+
+            <div class="col text-center">
+                <a href="{{ path('admin_products') }}" class="btn btn-secondary">Retour à la liste</a>
+            </div>
+
+            <div class="col text-center">
+                {{ include('admin/products/_delete_form.html.twig') }}
+            </div>
+        </div>
+
+    </div>
+
+{% endblock %}
